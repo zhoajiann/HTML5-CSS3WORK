@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        span {
+            color: red;
+        }
+        
+        div {
+            margin: 0 auto;
+            width: 430px;
+        }
+        
+        fieldset {
+            margin: 0 auto;
+            width: 420px;
+        }
+        
+        input {
+            width: 400px;
+            height: 22px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>学生信息</h1>
+        <fieldset>
+            <legend style="color: red;">学生档案</legend>
+            <form action="#" method="GET">
+                <p>姓名：</p>
+                <input type="text" name="name1" placeholder="请输入姓名" required/>
+                <span>*</span>
+                <p>学号：</p>
+                <input type="number" name="no1" placeholder="请输入学号" min="1" required/>
+                <span>*</span>
+                <p>手机号码：</p>
+                <input type="tel" name="tel1" placeholder="请输入手机号" required/>
+                <span>*</span>
+                <p>邮箱地址：</p>
+                <input type="email" name="tel1" placeholder="请输入邮箱地址" required/>
+                <span>*</span>
+                <p>录取学校</p>
+                <input type="search" name="school1" list="school">
+                <datalist id="school">
+                    <option>北京工业大学</option>
+                    <option>北京邮电大学</option>
+                    <option>上海交通大学</option>
+                    <option>北京交通大学</option>
+                    <option>华东师范大学</option>
+                    <option>南开大学</option>
+                </datalist>
+                <p>入学成绩：</p>
+                <input type="number" name="score1" min="1" max="750">
+                <p>入学时间</p>
+                <input type="date" name="date1">
+                <br><br>
+                <input type="submit" name="sub1">
+            </form>
+        </fieldset>
+    </div>
+</body>
+
+</html>
