@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        ul,
+        li {
+            list-style: none;
+        }
+        
+        .box {
+            width: 700px;
+            height: 400px;
+            margin: 0 auto;
+        }
+        
+        .box legend {
+            font-weight: bold;
+            font-size: 50px;
+            color: red;
+            margin-left: 30px;
+        }
+        
+        ul {
+            width: 650px;
+            height: 60px;
+            border: 2px #bbb solid;
+            margin: 50px auto;
+            background-color: white;
+        }
+        
+        ul li {
+            width: 20px;
+            height: 30px;
+            line-height: 30px;
+            margin-top: 15px;
+            margin-left: 5px;
+            margin-right: 15px;
+            float: left;
+        }
+        
+        .bottomBox {
+            width: 630px;
+            height: 120px;
+            line-height: 40px;
+            font-size: 25px;
+            margin: 0 auto;
+            background-color: #aaa;
+        }
+        
+        #littleDivCss {
+            width: 34px;
+            height: 17px;
+            line-height: 17px;
+            border: 1px #777 solid;
+            position: fixed;
+            text-align: center;
+            color: #777;
+            ;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset class="box">
+        <legend>页面换肤</legend>
+        <ul>
+            <li style="background-color: blue;"></li>
+            <li style="background-color:purple;"></li>
+            <li style="background-color:red;"></li>
+            <li style="background-color:yellow;"></li>
+            <li style="background-color:green;"></li>
+            <li style="background-color:orange;"></li>
+        </ul>
+        <div class="bottomBox">
+            <p>LocalStorage将数据保存在客户端本地的硬件设备中，即使浏览器被关闭了，该数据仍然存在，下次打开浏览器访问网站时仍然可以继续使用。</p>
+        </div>
+    </fieldset>
+</body>
+<script>
+    var bottomBox = document.getElementsByClassName("bottomBox")[0];
+    var topBox = document.getElementsByTagName("li");
+
+    window.onload = function() {
+        if (localStorage.getItem("keyColor") === null) {
+            topBox[0].style.marginTop = 5 + "px";
+            bottomBox.style.backgroundColor = topBox[0].style.backgroundColor;
+        } else {
+            bottomBox.style.backgroundColor = localStorage.getItem("keyColor");
+        }
+    }
+
+    for (var i = 0; i < topBox.length; i++) {
+        if (localStorage.getItem("keyColor") === topBox[i].style.backgroundColor) {
+            topBox[i].style.marginTop = 5 + "px";
+        }
+    }
+
+    var colors = ["蓝色", "紫色", "红色", "黄色", "绿色", "橙色"];
+    for (var i = 0; i < topBox.length; i++) {
+        topBox[i].setColor = colors[i]
+        topBox[i].onmouseover = function(e) {
+            var littleDiv = document.createElement("div");
+            littleDiv.id = "littleDivCss";
+            littleDiv.innerHTML = this.setColor;
+            littleDiv.style.left = e.clientX + 10 + "px";
+            littleDiv.style.top = e.clientY + 10 + "px";
+            document.body.appendChild(littleDiv);
+        }
+        topBox[i].onmousemove = function(e) {
+            var littleDiv = document.getElementById("littleDivCss");
+            littleDiv.style.left = e.clientX + 10 + "px";
+            littleDiv.style.top = e.clientY + 10 + "px";
+        }
+        topBox[i].onmouseout = function() {
+            var littleDiv = document.getElementById("littleDivCss");
+            document.body.removeChild(littleDiv);
+        }
+
+        topBox[i].onclick = function() {
+            for (var j = 0; j < topBox.length; j++) {
+                topBox[j].style.marginTop = 15 + "px";
+            }
+            this.style.marginTop = 5 + "px";
+            localStorage.setItem("keyColor", this.style.backgroundColor);
+            bottomBox.style.backgroundColor = localStorage.getItem("keyColor");
+        }
+    }
+</script>
+
+</html>
